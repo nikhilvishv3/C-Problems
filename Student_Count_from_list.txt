@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+		int nf = 10;
+    int i,j,count,n;
+    char *reg;
+    int visited = -1;
+    int *done;
+    printf("Enter the No. of students\n");
+    scanf("%d",&n);
+    reg = (char*)malloc(sizeof(char)*nf*n);
+    done = (int*)malloc(sizeof(int)*n);
+    printf("Enter the Names\n");
+    for(i=0;i<n;i++)
+    {
+      scanf("%s",(reg+(i*nf)));
+    }
+   
+   for(int i = 0; i < n; i++){    
+        int count = 1;    
+        for(int j = i+1; j < n; j++){    
+            if(*(reg+(nf*i)) == *(reg+(nf*j)))
+            {    
+                count++;    
+                //To avoid counting same element again    
+                *(done+j) = visited;    
+            }    
+        }     
+        if(*(done+i) != visited )    
+            *(done+i) = count;    
+    }  
+
+      printf("---------------------\n");    
+    printf(" Name | Frequency\n");    
+    printf("---------------------\n");    
+    for(int i = 0; i < n; i++){    
+        if(*(done+i) != visited){    
+            printf("    %s", reg+(nf*i));    
+            printf("     |  ");    
+            printf("  %d\n",*(done+i));    
+        }    
+    }    
+    printf("---------------------\n");     
+   
+    return 0;
+}
+  
